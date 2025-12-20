@@ -13,13 +13,14 @@ function Course() {
   const [loading, setLoading] = useState(true);
   const [selectedBook, setSelectedBook] = useState(null);
   const { socket } = useSocket();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
 
   const categories = ["All", "Free", "Programming", "Web Development", "Data Science", "Business", "Design", "Cybersecurity"];
 
   const fetchBooks = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:4001/book");
+      const res = await axios.get(`${API_URL}/book`);
       setBook(res.data);
       setFilteredBooks(res.data);
       setLoading(false);

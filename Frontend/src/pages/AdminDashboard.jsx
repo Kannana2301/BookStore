@@ -11,6 +11,7 @@ function AdminDashboard() {
   const [authUser] = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
 
   const {
     register,
@@ -45,7 +46,7 @@ function AdminDashboard() {
 
     try {
       const response = await axios.post(
-        "http://localhost:4001/book",
+        `${API_URL}/book`,
         bookData,
         {
           headers: {

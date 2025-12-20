@@ -10,12 +10,13 @@ export default function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
   const [connected, setConnected] = useState(false);
   const [activeUsers, setActiveUsers] = useState(0);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4001";
 
   useEffect(() => {
     // Only connect if user is authenticated and has a token
     if (authUser && authUser.token) {
       console.log("Attempting to connect socket with token:", authUser.token ? "Present" : "Missing");
-      const newSocket = io("http://localhost:4001", {
+      const newSocket = io(API_URL, {
         auth: {
           token: authUser.token,
         },
