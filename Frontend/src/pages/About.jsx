@@ -114,7 +114,7 @@ function About() {
                 </h2>
                 <div className="space-y-3 text-slate-600 dark:text-slate-300">
                   <p>
-                    Founded in 2024, BookStore was born from a simple idea: make quality books accessible to everyone, anywhere, anytime.
+                    Founded in 2025, BookStore was born from a simple idea: make quality books accessible to everyone, anywhere, anytime.
                   </p>
                   <p>
                     We believe that books have the power to transform lives, spark creativity, and open doors to new possibilities.

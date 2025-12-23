@@ -25,9 +25,9 @@ function Contact() {
 
   const contactMethods = [
     { icon: "📧", title: "Email", detail: "support@bookstore.com" },
-    { icon: "📱", title: "Phone", detail: "+1 (555) 123-4567" },
+    { icon: "📱", title: "Phone", detail: "9888224668" },
     { icon: "💬", title: "Live Chat", detail: "Available" },
-    { icon: "📍", title: "Visit", detail: "123 Book St, NY" },
+    { icon: "📍", title: "Visit", detail: "CHITKARA" },
   ];
 
   const faqs = [

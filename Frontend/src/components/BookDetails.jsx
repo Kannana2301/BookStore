@@ -1,7 +1,47 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 function BookDetails({ book, onClose }) {
   if (!book) return null;
+
+  const addToCart = () => {
+    // Get existing cart or create empty array
+    const savedCart = localStorage.getItem("cart");
+    const cart = savedCart ? JSON.parse(savedCart) : [];
+
+    // Check if book already in cart
+    const existingItem = cart.find((item) => item._id === book._id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        ...book,
+        quantity: 1,
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("Added to cart! 🛒");
+  };
+
+  const addToWishlist = () => {
+    // Get existing wishlist or create empty array
+    const savedWishlist = localStorage.getItem("wishlist");
+    const wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
+
+    // Check if book already in wishlist
+    const existingItem = wishlist.find((w) => w._id === book._id);
+
+    if (existingItem) {
+      toast.success("Already in wishlist!");
+      return;
+    }
+
+    wishlist.push(book);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    toast.success("Added to wishlist! ❤️");
+  };
 
   return (
     <dialog id="book_details_modal" className="modal" open>
@@ -76,11 +116,17 @@ function BookDetails({ book, onClose }) {
 
             {/* Action Buttons */}
             <div className="flex gap-4">
-              <button className="btn bg-pink-500 text-white border-none hover:bg-pink-600 flex-1">
-                {book.price === 0 ? "Read Now" : `Buy for $${book.price}`}
+              <button 
+                onClick={addToCart}
+                className="btn bg-pink-500 text-white border-none hover:bg-pink-600 flex-1"
+              >
+                {book.price === 0 ? "📖 Read Now" : `💳 Buy for $${book.price}`}
               </button>
-              <button className="btn btn-outline">
-                Add to Wishlist
+              <button 
+                onClick={addToWishlist}
+                className="btn btn-outline flex-1"
+              >
+                ❤️ Add to Wishlist
               </button>
             </div>
           </div>

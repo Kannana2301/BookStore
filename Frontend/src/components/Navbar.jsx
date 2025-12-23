@@ -124,6 +124,19 @@ function Navbar() {
                 </svg>
               </label>
             </div>
+
+            {/* Wishlist and Cart Icons */}
+            {authUser && (
+              <div className="flex gap-2">
+                <a href="/wishlist" className="btn btn-ghost btn-circle" title="Wishlist">
+                  ❤️
+                </a>
+                <a href="/cart" className="btn btn-ghost btn-circle" title="Cart">
+                  🛒
+                </a>
+              </div>
+            )}
+
             <label className="swap swap-rotate">
               {/* this hidden checkbox controls the state */}
               <input

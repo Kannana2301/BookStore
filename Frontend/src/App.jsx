@@ -6,6 +6,9 @@ import Signup from "./components/Signup";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import AdminDashboard from "./pages/AdminDashboard";
+import Wishlist from "./pages/Wishlist";
+import Cart from "./pages/Cart";
+import Success from "./pages/Success";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
 
@@ -28,6 +31,15 @@ function App() {
             path="/admin" 
             element={authUser ? <AdminDashboard /> : <Navigate to="/signup" />} 
           />
+          <Route 
+            path="/wishlist" 
+            element={authUser ? <Wishlist /> : <Navigate to="/signup" />} 
+          />
+          <Route 
+            path="/cart" 
+            element={authUser ? <Cart /> : <Navigate to="/signup" />} 
+          />
+          <Route path="/success" element={<Success />} />
         </Routes>
         <Toaster />
       </div>

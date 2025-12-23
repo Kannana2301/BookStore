@@ -1,6 +1,46 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 function Cards({ item, onViewDetails }) {
+  const addToWishlist = (book) => {
+    // Get existing wishlist or create empty array
+    const savedWishlist = localStorage.getItem("wishlist");
+    const wishlist = savedWishlist ? JSON.parse(savedWishlist) : [];
+
+    // Check if book already in wishlist
+    const existingItem = wishlist.find((w) => w._id === book._id);
+
+    if (existingItem) {
+      toast.success("Already in wishlist!");
+      return;
+    }
+
+    wishlist.push(book);
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    toast.success("Added to wishlist! ❤️");
+  };
+
+  const addToCart = (book) => {
+    // Get existing cart or create empty array
+    const savedCart = localStorage.getItem("cart");
+    const cart = savedCart ? JSON.parse(savedCart) : [];
+
+    // Check if book already in cart
+    const existingItem = cart.find((item) => item._id === book._id);
+
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({
+        ...book,
+        quantity: 1,
+      });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("Added to cart! 🛒");
+  };
+
   return (
     <>
       <div className="mt-4 my-3 p-3">
@@ -38,7 +78,17 @@ function Cards({ item, onViewDetails }) {
                     Details
                   </button>
                 )}
-                <button className="btn btn-sm bg-pink-500 text-white border-none hover:bg-pink-600">
+                <button 
+                  onClick={() => addToWishlist(item)}
+                  className="btn btn-sm btn-ghost hover:bg-pink-100 dark:hover:bg-pink-900"
+                  title="Add to Wishlist"
+                >
+                  ❤️
+                </button>
+                <button 
+                  onClick={() => addToCart(item)}
+                  className="btn btn-sm bg-pink-500 text-white border-none hover:bg-pink-600"
+                >
                   {item.price === 0 ? "Read Now" : "Buy Now"}
                 </button>
               </div>
